@@ -42,7 +42,10 @@ int main(int argc, char* argv[])
 	// Test, prints the contents of the memory and registers
 	PrintDebug(cpu, mem);
 	/////////////
-	DoCPUCycle(cpu, mem, keyb);
+	while (running) {
+		DoCPUCycle(cpu, mem, keyb);
+		running = 0;
+	}
 	
 	DestroyKeyboard(keyb);
 	DestroyMemory(mem);
