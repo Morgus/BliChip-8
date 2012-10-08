@@ -11,7 +11,7 @@
 
 typedef struct _Memory
 {
-	uint8_t data[0xFFF];
+	uint8_t data[0x1000];
 } Memory;
 
 Memory* InitMemory(char* filename);
