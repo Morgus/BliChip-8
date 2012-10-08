@@ -63,7 +63,7 @@ void Op_9XY0(uint16_t opcode, CPU* cpu);
 void Op_ANNN(uint16_t opcode, CPU* cpu);
 void Op_BNNN(uint16_t opcode, CPU* cpu);
 void Op_CXNN(uint16_t opcode, CPU* cpu);
-void Op_DXYN(uint16_t opcode, CPU* cpu, Memory* mem, , Display* disp);
+void Op_DXYN(uint16_t opcode, CPU* cpu, Memory* mem, Display* disp);
 void Op_EX9E(uint16_t opcode, CPU* cpu, Keyboard* keyb);
 void Op_EXA1(uint16_t opcode, CPU* cpu, Keyboard* keyb);
 void Op_FX07(uint16_t opcode, CPU* cpu);
