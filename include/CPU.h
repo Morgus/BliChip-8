@@ -5,6 +5,7 @@
 #ifndef _CPU_H_
 #define _CPU_H_
 
+#include <windows.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include "memory.h"
@@ -39,6 +40,7 @@ typedef struct _CPU
 } CPU;
 
 void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb);
+void UpdateCPUTimers(CPU* cpu);
 
 CPU* CreateCPU();
 void InitCPU(CPU* cpu);

@@ -4,8 +4,21 @@
 
 #include "CPU.h"
 
+const int CYCLE_TIME = 16;
+
 void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb)
 {
+	UpdateCPUTimers(cpu);
+}
+
+void UpdateCPUTimers(CPU* cpu)
+{
+	if (cpu->reg.DT > 0)
+		--(cpu->reg.DT);
+	if (cpu->reg.ST > 0) {
+		--(cpu->reg.ST);
+		Beep(500, 16);
+	}
 }
 
 CPU* CreateCPU()
