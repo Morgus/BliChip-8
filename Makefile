@@ -15,7 +15,8 @@ CFLAGS = -Wall -W -O2 -Iinclude
 OBJS := $(objdir)/main.o \
 $(objdir)/CPU.o \
 $(objdir)/memory.o \
-$(objdir)/keyboard.o
+$(objdir)/keyboard.o \
+$(objdir)/display.o
 
 # Main build
 all: $(OBJS)
@@ -32,6 +33,9 @@ $(objdir)/memory.o: $(srcdir)/memory.c
 	$(CC) -c $? -o $@ $(CFLAGS)
 
 $(objdir)/keyboard.o: $(srcdir)/keyboard.c
+	$(CC) -c $? -o $@ $(CFLAGS)
+
+$(objdir)/display.o: $(srcdir)/display.c
 	$(CC) -c $? -o $@ $(CFLAGS)
 
 clean:

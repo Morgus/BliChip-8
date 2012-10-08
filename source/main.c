@@ -6,6 +6,7 @@
 #include "CPU.h"
 #include "memory.h"
 #include "keyboard.h"
+#include "display.h"
 
 void PrintDebug(CPU* cpu, Memory* mem)
 {
@@ -13,7 +14,7 @@ void PrintDebug(CPU* cpu, Memory* mem)
 	printf("MEMORY:\n\n");
 	for (i = 0; i <= 0xFFF; ++i)
 		printf("%X: %X\n", i, mem->data[i]);
-	printf("CPU REGISTERS:\n\n");
+	printf("\nCPU REGISTERS:\n\n");
 	for (i = 0; i <= 15; ++i)
 		printf("V%X: %X\n", i, cpu->reg.V[i]);
 	printf("I: %X\n", cpu->reg.I);
@@ -21,7 +22,7 @@ void PrintDebug(CPU* cpu, Memory* mem)
 	printf("ST: %X\n", cpu->reg.ST);
 	printf("PC: %X\n", cpu->reg.PC);
 	printf("SP: %X\n", cpu->reg.SP);
-	printf("STACK:\n\n");
+	printf("\nSTACK:\n\n");
 	for (i = 0; i <= 15; ++i)
 		printf("%X: %X\n", i, cpu->stack[i]);
 }
