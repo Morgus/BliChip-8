@@ -14,7 +14,9 @@ typedef struct _Keypad
 } Keyboard;
 
 void UpdateKeyboard(Keyboard* keyb);
-Keyboard* InitKeyboard();
+
+Keyboard* CreateKeyboard();
+void InitKeyboard(Keyboard* keyb);
 void DestroyKeyboard(Keyboard* keyb);
 
 #endif /* _KEYBOARD_H_ */

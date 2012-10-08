@@ -7,6 +7,8 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include "memory.h"
+#include "keyboard.h"
 
 typedef struct _Registers
 {
@@ -36,8 +38,10 @@ typedef struct _CPU
 	uint16_t stack[16];
 } CPU;
 
-CPU* InitCPU();
-void DoCPUCycle(CPU* cpu);
+void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb);
+
+CPU* CreateCPU();
+void InitCPU(CPU* cpu);
 void DestroyCPU(CPU* cpu);
 
 #endif /* _CPU_H_ */

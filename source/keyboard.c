@@ -8,14 +8,18 @@ void UpdateKeyboard(Keyboard* keyb)
 {
 }
 
-Keyboard* InitKeyboard()
+Keyboard* CreateKeyboard()
 {
-	int i;
 	Keyboard* keyb;
 	keyb = (Keyboard*) malloc(sizeof(Keyboard));
+	return keyb;
+}
+
+void InitKeyboard(Keyboard* keyb)
+{
+	int i;
 	for (i = 0; i < 16; ++i)
 		keyb->key[i] = 0;
-	return keyb;
 }
 
 void DestroyKeyboard(Keyboard* keyb)

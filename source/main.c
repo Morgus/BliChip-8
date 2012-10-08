@@ -16,11 +16,11 @@ int main(int argc, char* argv[])
 	CPU* cpu;
 	Memory* mem;
 	Keyboard* keyb;
-	cpu = InitCPU();
-	mem = InitMemory(argv[1]);
-	keyb = InitKeyboard();
+	cpu = CreateCPU();
+	mem = CreateMemory(argv[1]);
+	keyb = CreateKeyboard();
 	
-	DoCPUCycle(cpu);
+	DoCPUCycle(cpu, mem, keyb);
 	
 	DestroyKeyboard(keyb);
 	DestroyMemory(mem);

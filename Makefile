@@ -9,7 +9,7 @@ bindir := bin
 # Build settings
 CC = gcc
 EXE = .exe
-CFLAGS = -Wall -O2 -Iinclude
+CFLAGS = -Wall -W -O2 -Iinclude
 
 # Objects
 OBJS := $(objdir)/main.o \

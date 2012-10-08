@@ -114,14 +114,18 @@ int LoadROM(Memory* mem, char* filename)
 	return 1;
 }
 
-Memory* InitMemory(char* filename)
+Memory* CreateMemory(char* filename)
 {
 	Memory* mem;
 	mem = (Memory*) malloc(sizeof(Memory));
-	if (!LoadROM(mem, filename))
-		return NULL;
-	LoadFontToMemory(mem);
+	InitMemory(mem, filename);
 	return mem;
+}
+
+void InitMemory(Memory* mem, char* filename)
+{
+	LoadROM(mem, filename);
+	LoadFontToMemory(mem);
 }
 
 void DestroyMemory(Memory* mem)

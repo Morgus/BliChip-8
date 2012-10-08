@@ -15,7 +15,10 @@ typedef struct _Memory
 } Memory;
 
 void LoadFontToMemory(Memory* mem);
-Memory* InitMemory(char* filename);
+int LoadROM(Memory* mem, char* filename);
+
+Memory* CreateMemory(char* filename);
+void InitMemory(Memory* mem, char* filename);
 void DestroyMemory(Memory* mem);
 
 #endif /* _MEMORY_H_ */
