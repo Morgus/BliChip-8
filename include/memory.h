@@ -14,6 +14,7 @@ typedef struct _Memory
 	uint8_t data[0x1000];
 } Memory;
 
+void LoadFontToMemory(Memory* mem);
 Memory* InitMemory(char* filename);
 void DestroyMemory(Memory* mem);
 
