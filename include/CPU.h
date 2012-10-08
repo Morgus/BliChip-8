@@ -13,7 +13,7 @@ typedef struct _Registers
 	/* 16 8-bit registers
 	 * 15 used normally, last one carry.
 	 */
-	uint8_t V[0xF];
+	uint8_t V[16];
 	
 	// A 16-bit register
 	uint16_t I;
@@ -37,7 +37,7 @@ typedef struct _CPU
 } CPU;
 
 CPU* InitCPU();
-void CPU_Cycle(CPU* cpu);
+void DoCPUCycle(CPU* cpu);
 void DestroyCPU(CPU* cpu);
 
 #endif /* _CPU_H_ */

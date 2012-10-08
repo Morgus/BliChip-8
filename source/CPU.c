@@ -11,7 +11,7 @@ CPU* InitCPU()
 	return cpu;
 }
 
-void CPU_Cycle(CPU* cpu)
+void DoCPUCycle(CPU* cpu)
 {
 }
 
