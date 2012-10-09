@@ -4,6 +4,10 @@
 
 #include "display.h"
 
+void ClearDisplay(Display* disp)
+{
+}
+
 Display* CreateDisplay()
 {
 	Display* disp;

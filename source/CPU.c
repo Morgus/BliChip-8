@@ -41,6 +41,7 @@ void InitCPU(CPU* cpu)
 	cpu->reg.SP = 0;
 	for (i = 0; i < 16; ++i)
 		cpu->stack[i] = 0;
+	srand(time(NULL));
 }
 
 void DestroyCPU(CPU* cpu)

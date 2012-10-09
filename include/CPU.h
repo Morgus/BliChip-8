@@ -6,8 +6,10 @@
 #define _CPU_H_
 
 #include <windows.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <time.h>
 #include "memory.h"
 #include "keyboard.h"
 #include "display.h"
@@ -40,9 +42,9 @@ typedef struct _CPU
 	uint16_t stack[16];
 } CPU;
 
-void Op_0NNN(uint16_t opcode, CPU* cpu);
-void Op_00E0(uint16_t opcode, CPU* cpu, Display* disp);
-void Op_00EE(uint16_t opcode, CPU* cpu);
+void Op_0NNN();
+void Op_00E0(Display* disp);
+void Op_00EE(CPU* cpu);
 void Op_1NNN(uint16_t opcode, CPU* cpu);
 void Op_2NNN(uint16_t opcode, CPU* cpu);
 void Op_3XNN(uint16_t opcode, CPU* cpu);
@@ -71,7 +73,7 @@ void Op_FX0A(uint16_t opcode, CPU* cpu, Keyboard* keyb);
 void Op_FX15(uint16_t opcode, CPU* cpu);
 void Op_FX18(uint16_t opcode, CPU* cpu);
 void Op_FX1E(uint16_t opcode, CPU* cpu);
-void Op_FX29(uint16_t opcode, CPU* cpu, Memory* mem);
+void Op_FX29(uint16_t opcode, CPU* cpu);
 void Op_FX33(uint16_t opcode, CPU* cpu, Memory* mem);
 void Op_FX55(uint16_t opcode, CPU* cpu, Memory* mem);
 void Op_FX65(uint16_t opcode, CPU* cpu, Memory* mem);

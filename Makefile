@@ -16,7 +16,8 @@ OBJS := $(objdir)/main.o \
 $(objdir)/CPU.o \
 $(objdir)/memory.o \
 $(objdir)/keyboard.o \
-$(objdir)/display.o
+$(objdir)/display.o \
+$(objdir)/opcodes.o
 
 # Main build
 all: $(OBJS)
@@ -36,6 +37,9 @@ $(objdir)/keyboard.o: $(srcdir)/keyboard.c
 	$(CC) -c $? -o $@ $(CFLAGS)
 
 $(objdir)/display.o: $(srcdir)/display.c
+	$(CC) -c $? -o $@ $(CFLAGS)
+
+$(objdir)/opcodes.o: $(srcdir)/opcodes.c
 	$(CC) -c $? -o $@ $(CFLAGS)
 
 clean:

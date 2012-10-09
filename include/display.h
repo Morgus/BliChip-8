@@ -13,6 +13,8 @@ typedef struct _Display
 	uint8_t pixel[32][64];
 } Display;
 
+void ClearDisplay(Display* disp);
+
 Display* CreateDisplay();
 void DestroyDisplay(Display* disp);
 
