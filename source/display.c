@@ -8,6 +8,15 @@ void ClearDisplay(Display* disp)
 {
 }
 
+uint8_t DrawSprite(Display* disp, uint8_t* sprite, uint8_t x, uint8_t y)
+{
+	return 0;
+}
+
+void UpdateDisplay(Display* disp)
+{
+}
+
 Display* CreateDisplay()
 {
 	Display* disp;

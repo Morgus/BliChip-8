@@ -23,7 +23,8 @@ void Op_00EE(CPU* cpu)
 
 void Op_1NNN(uint16_t opcode, CPU* cpu)
 {
-	cpu->reg.PC = opcode & 0x0FFF;
+	// 2 added every cycle, 2 has to be subtracted
+	cpu->reg.PC = (opcode & 0x0FFF) - 2;
 }
 
 void Op_2NNN(uint16_t opcode, CPU* cpu)
@@ -32,7 +33,7 @@ void Op_2NNN(uint16_t opcode, CPU* cpu)
 		printf("Stack overflow!\n");
 		return;
 	}
-	cpu->stack[cpu->reg.SP] = cpu->reg.PC;
+	cpu->stack[cpu->reg.SP] = cpu->reg.PC - 2;
 	// This is why SP points to the next stack location instead of the last
 	// address's location
 	++(cpu->reg.SP);
@@ -144,7 +145,7 @@ void Op_8XY7(uint16_t opcode, CPU* cpu)
 void Op_8XYE(uint16_t opcode, CPU* cpu)
 {
 	uint8_t X = (opcode & 0x0F00) >> 8;
-	cpu->reg.V[0xF] = cpu->reg.V[X] & 0x80 >> 7;
+	cpu->reg.V[0xF] = (cpu->reg.V[X] & 0x80) >> 7;
 	cpu->reg.V[X] = cpu->reg.V[X] << 1;
 }
 
@@ -174,9 +175,14 @@ void Op_CXNN(uint16_t opcode, CPU* cpu)
 
 void Op_DXYN(uint16_t opcode, CPU* cpu, Memory* mem, Display* disp)
 {
-	// Displays N-byte sprite at memory location I at (VX, VY),
-	// sets VF = collision
-	printf("DXYN not implemented.\n");
+	int i;
+	uint8_t X = (opcode & 0x0F00) >> 8;
+	uint8_t Y = (opcode & 0x00F0) >> 4;
+	uint8_t sprite[15];
+	for (i = 0; i < (opcode & 0x000F); ++i)
+		sprite[i] = mem->data[cpu->reg.I + i];
+	cpu->reg.V[0xF] = DrawSprite(disp, sprite, cpu->reg.V[X], cpu->reg.V[Y]);
+	UpdateDisplay(disp);
 }
 
 void Op_EX9E(uint16_t opcode, CPU* cpu, Keyboard* keyb)
