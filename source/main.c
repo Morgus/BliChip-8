@@ -37,17 +37,29 @@ int main(int argc, char* argv[])
 	CPU* cpu;
 	Memory* mem;
 	Keyboard* keyb;
+	Display* disp;
 	cpu = CreateCPU();
 	mem = CreateMemory(argv[1]);
 	keyb = CreateKeyboard();
+	disp = CreateDisplay();
+	
+	// Test, only 20 cycles
+	for (running = 0; running < 20; ++running) {
+		UpdateKeyboard(keyb);
+		DoCPUCycle(cpu, mem, keyb, disp);
+		cpu->reg.PC += 2;
+	}
+	//while (running) {
+	//	DoCPUCycle(cpu, mem, keyb, disp);
+	//	cpu->reg.PC += 2;
+	//	running = 0;
+	//}
+	
 	// Test, prints the contents of the memory and registers
 	PrintDebug(cpu, mem);
 	/////////////
-	while (running) {
-		DoCPUCycle(cpu, mem, keyb);
-		running = 0;
-	}
 	
+	DestroyDisplay(disp);
 	DestroyKeyboard(keyb);
 	DestroyMemory(mem);
 	DestroyCPU(cpu);

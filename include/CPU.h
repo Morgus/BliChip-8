@@ -78,7 +78,7 @@ void Op_FX33(uint16_t opcode, CPU* cpu, Memory* mem);
 void Op_FX55(uint16_t opcode, CPU* cpu, Memory* mem);
 void Op_FX65(uint16_t opcode, CPU* cpu, Memory* mem);
 
-void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb);
+void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp);
 void UpdateCPUTimers(CPU* cpu);
 
 CPU* CreateCPU();
