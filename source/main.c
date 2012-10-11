@@ -3,14 +3,15 @@
  */
 
 #include <stdio.h>
+#include <SDL.h>
 #include "CPU.h"
 #include "memory.h"
 #include "keyboard.h"
 #include "display.h"
 
-void PrintDebug(CPU* cpu, Memory* mem)
+void PrintDebug(CPU* cpu, Memory* mem, Display* disp)
 {
-	int i;
+	int i, j;
 	printf("MEMORY:\n\n");
 	for (i = 0; i <= 0xFFF; ++i)
 		printf("%X: %X\n", i, mem->data[i]);
@@ -25,14 +26,24 @@ void PrintDebug(CPU* cpu, Memory* mem)
 	printf("\nSTACK:\n\n");
 	for (i = 0; i <= 15; ++i)
 		printf("%X: %X\n", i, cpu->stack[i]);
+	printf("\nDISPLAY:\n\n");
+	for (i = 0; i < 32; ++i) {
+		for (j = 0; j < 64; ++j)
+			printf("%i", disp->pixel[i][j]);
+		printf("\n");
+	}
 }
 
 int main(int argc, char* argv[])
 {
 	if (argc != 2) {
-		printf("Wrong arguments.");
+		printf("Wrong arguments.\n");
 		return 1;
 	}
+	
+	if (SDL_INIT_VIDEO < 0)
+		return 1;
+	
 	int running = 1;
 	CPU* cpu;
 	Memory* mem;
@@ -43,8 +54,9 @@ int main(int argc, char* argv[])
 	keyb = CreateKeyboard();
 	disp = CreateDisplay();
 	
-	// Test, only 20 cycles
-	for (running = 0; running < 20; ++running) {
+	UpdateDisplay(disp);
+	// Test, only 62 cycles
+	for (running = 0; running < 62; ++running) {
 		UpdateKeyboard(keyb);
 		DoCPUCycle(cpu, mem, keyb, disp);
 		cpu->reg.PC += 2;
@@ -54,14 +66,14 @@ int main(int argc, char* argv[])
 	//	cpu->reg.PC += 2;
 	//	running = 0;
 	//}
-	
 	// Test, prints the contents of the memory and registers
-	PrintDebug(cpu, mem);
+	PrintDebug(cpu, mem, disp);
 	/////////////
 	
 	DestroyDisplay(disp);
 	DestroyKeyboard(keyb);
 	DestroyMemory(mem);
 	DestroyCPU(cpu);
+	SDL_Quit();
 	return 0;
 }

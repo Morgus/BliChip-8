@@ -6,6 +6,7 @@
 #define _CPU_H_
 
 #include <windows.h>
+#include <SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>

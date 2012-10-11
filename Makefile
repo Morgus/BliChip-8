@@ -9,7 +9,8 @@ bindir := bin
 # Build settings
 CC = gcc
 EXE = .exe
-CFLAGS = -Wall -W -O2 -Iinclude
+CFLAGS = -Wall -O2 -Iinclude -I/mingw/include/SDL2 -Dmain=SDL_main
+LIBS = -L/mingw/lib -lmingw32 -lSDL2main -lSDL2 -mwindows
 
 # Objects
 OBJS := $(objdir)/main.o \
@@ -21,7 +22,7 @@ $(objdir)/opcodes.o
 
 # Main build
 all: $(OBJS)
-	$(CC) $(OBJS) -o $(bindir)/program$(EXE)
+	$(CC) $(OBJS) -o $(bindir)/program$(EXE) $(LIBS)
 
 # Objects
 $(objdir)/main.o: $(srcdir)/main.c

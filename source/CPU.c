@@ -134,7 +134,7 @@ void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp)
 			break;
 	}
 	UpdateCPUTimers(cpu);
-	Sleep(CYCLE_TIME);
+	SDL_Delay(CYCLE_TIME);
 }
 
 void UpdateCPUTimers(CPU* cpu)
