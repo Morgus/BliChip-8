@@ -18,7 +18,7 @@ typedef struct _Display
 } Display;
 
 void ClearDisplay(Display* disp);
-uint8_t DrawSprite(Display* disp, uint8_t* sprite, uint8_t x, uint8_t y);
+uint8_t DrawSprite(Display* disp, uint8_t* sprite, int len, uint8_t x, uint8_t y);
 void UpdateDisplay(Display* disp);
 
 Display* CreateDisplay();

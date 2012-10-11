@@ -178,10 +178,11 @@ void Op_DXYN(uint16_t opcode, CPU* cpu, Memory* mem, Display* disp)
 	int i;
 	uint8_t X = (opcode & 0x0F00) >> 8;
 	uint8_t Y = (opcode & 0x00F0) >> 4;
+	uint8_t N = opcode & 0x000F;
 	uint8_t sprite[15];
-	for (i = 0; i < (opcode & 0x000F); ++i)
+	for (i = 0; i < N; ++i)
 		sprite[i] = mem->data[cpu->reg.I + i];
-	cpu->reg.V[0xF] = DrawSprite(disp, sprite, cpu->reg.V[X], cpu->reg.V[Y]);
+	cpu->reg.V[0xF] = DrawSprite(disp, sprite, N, cpu->reg.V[X], cpu->reg.V[Y]);
 	UpdateDisplay(disp);
 }
 

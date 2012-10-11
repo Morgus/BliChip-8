@@ -35,14 +35,14 @@ int CheckCoord(int coord, int axis)
 	return coord;
 }
 
-uint8_t DrawSprite(Display* disp, uint8_t* sprite, uint8_t x, uint8_t y)
+uint8_t DrawSprite(Display* disp, uint8_t* sprite, int len, uint8_t x, uint8_t y)
 {
 	SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
 	uint8_t VF = 0;
 	uint8_t pixel;
 	int temp_x, temp_y;
 	int i, j;
-	for (i = 0; i < 15; ++i) {
+	for (i = 0; i < len; ++i) {
 		for (j = 0; j < 8; ++j) {
 			pixel = (sprite[i] >> (7 - j)) & 0x01;
 			temp_y = CheckCoord(y + i, 0);
