@@ -5,12 +5,16 @@
 #ifndef _DISPLAY_H_
 #define _DISPLAY_H_
 
+#include <SDL.h>
 #include <stdlib.h>
 #include <stdint.h>
 
 typedef struct _Display
 {
 	uint8_t pixel[32][64];
+	SDL_Window* window;
+	SDL_Renderer* renderer;
+	SDL_Rect pixelRect[32][64];
 } Display;
 
 void ClearDisplay(Display* disp);
