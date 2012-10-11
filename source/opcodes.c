@@ -196,7 +196,7 @@ void Op_EX9E(uint16_t opcode, CPU* cpu, Keyboard* keyb)
 void Op_EXA1(uint16_t opcode, CPU* cpu, Keyboard* keyb)
 {
 	uint8_t X = (opcode & 0x0F00) >> 8;
-	if (keyb->key[cpu->reg.V[X]] != 1)
+	if (keyb->key[cpu->reg.V[X]] == 0)
 		cpu->reg.PC += 2;
 }
 
@@ -208,8 +208,32 @@ void Op_FX07(uint16_t opcode, CPU* cpu)
 
 void Op_FX0A(uint16_t opcode, CPU* cpu, Keyboard* keyb)
 {
-	// Wait for keypress, store key value in VX
-	printf("FX0A not implemented.\n");
+	uint8_t X = (opcode & 0x0F00) >> 8;
+	
+	int notPressed = 1;
+	SDL_Event ev;
+	int i;
+	
+	while (notPressed) {
+		while (SDL_PollEvent(&ev)) {
+			if (ev.type == SDL_QUIT) {
+				cpu->running = 0;
+				notPressed = 0; // If user closes the window
+			}
+		}
+		if (!notPressed)
+			break;
+		
+		UpdateKeyboard(keyb);
+		for (i = 0; i < 16; ++i) {
+			if (keyb->key[i]) {
+				cpu->reg.V[X] = i;
+				notPressed = 0;
+			}
+		}
+		
+		SDL_Delay(16); // CYCLE_TIME
+	}
 }
 
 void Op_FX15(uint16_t opcode, CPU* cpu)
