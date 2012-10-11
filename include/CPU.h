@@ -41,6 +41,7 @@ typedef struct _CPU
 {
 	Registers reg;
 	uint16_t stack[16];
+	int running;
 } CPU;
 
 void Op_0NNN();
