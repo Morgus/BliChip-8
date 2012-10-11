@@ -107,25 +107,30 @@ void LoadFontToMemory(Memory* mem)
 int LoadROM(Memory* mem, char* filename)
 {
 	FILE* file;
-	if ((file = fopen(filename, "r")) == NULL)
+	if ((file = fopen(filename, "rb")) == NULL) {
+		printf("Could not open file.");
 		return 0;
-	fread(&mem->data[0x200], 1, 0x1000 - 0x200, file);
+	}	
+	fread(&(mem->data[0x200]), 1, 0x1000 - 0x200, file);
 	fclose(file);
 	return 1;
 }
 
 Memory* CreateMemory(char* filename)
 {
+	int i;
 	Memory* mem;
 	mem = (Memory*) malloc(sizeof(Memory));
+	for (i = 0; i < 0x1000; ++i)
+		mem->data[i] = 0;
 	InitMemory(mem, filename);
 	return mem;
 }
 
 void InitMemory(Memory* mem, char* filename)
 {
-	LoadROM(mem, filename);
 	LoadFontToMemory(mem);
+	LoadROM(mem, filename);
 }
 
 void DestroyMemory(Memory* mem)

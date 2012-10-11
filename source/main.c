@@ -9,7 +9,7 @@
 #include "keyboard.h"
 #include "display.h"
 
-void PrintDebug(CPU* cpu, Display* disp, Keyboard* keyb)
+void PrintDebug(CPU* cpu, Display* disp, Keyboard* keyb, Memory* mem)
 {
 	int i, j;
 	printf("CPU REGISTERS:\n\n");
@@ -32,6 +32,9 @@ void PrintDebug(CPU* cpu, Display* disp, Keyboard* keyb)
 	printf("\nKEYBOARD:\n\n");
 	for (i = 0; i <= 15; ++i)
 		printf("%X: %i\n", i, keyb->key[i]);
+	printf("\nMEMORY:\n\n");
+	for (i = 0; i <= 0xFFF; ++i)
+		printf("%X: %X\n", i, mem->data[i]);
 }
 
 int main(int argc, char* argv[])
@@ -56,6 +59,12 @@ int main(int argc, char* argv[])
 	keyb = CreateKeyboard();
 	disp = CreateDisplay();
 	
+	// Test, prints the contents of the memory and registers
+	PrintDebug(cpu, disp, keyb, mem);
+	/////////////
+	
+	UpdateDisplay(disp);
+	
 	while (cpu->running) {
 		while (SDL_PollEvent(&ev)) {
 			if (ev.type == SDL_QUIT)
@@ -65,9 +74,6 @@ int main(int argc, char* argv[])
 		DoCPUCycle(cpu, mem, keyb, disp);
 		cpu->reg.PC += 2;
 	}
-	// Test, prints the contents of the memory and registers
-	PrintDebug(cpu, disp, keyb);
-	/////////////
 	
 	DestroyDisplay(disp);
 	DestroyKeyboard(keyb);

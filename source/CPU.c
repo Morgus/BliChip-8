@@ -4,7 +4,7 @@
 
 #include "CPU.h"
 
-const int CYCLE_TIME = 16;
+const int CYCLE_TIME = 4;
 
 void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp)
 {

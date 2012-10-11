@@ -232,7 +232,7 @@ void Op_FX0A(uint16_t opcode, CPU* cpu, Keyboard* keyb)
 			}
 		}
 		
-		SDL_Delay(16); // CYCLE_TIME
+		SDL_Delay(4); // CYCLE_TIME
 	}
 }
 
