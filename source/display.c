@@ -11,28 +11,12 @@ const int WINDOW_HEIGHT = 4 * 32;
 void ClearDisplay(Display* disp)
 {
 	int i, j;
-	SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255);
-	SDL_RenderClear(disp->renderer);
 	for (i = 0; i < 32; ++i)
 		for (j = 0; j < 64; ++j)
 			disp->pixel[i][j] = 0;
-}
-
-int CheckCoord(int coord, int axis)
-{
-	if (axis == 0) {
-		if (coord < 0)
-			coord += 32;
-		else if (coord > 31)
-			coord -= 32;
-	}
-	if (axis == 1) {
-		if (coord < 0)
-			coord += 64;
-		else if (coord > 63)
-			coord -= 64;
-	}
-	return coord;
+	SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(disp->renderer);
+	SDL_RenderPresent(disp->renderer);
 }
 
 uint8_t DrawSprite(Display* disp, uint8_t* sprite, int len, uint8_t x, uint8_t y)
@@ -45,16 +29,12 @@ uint8_t DrawSprite(Display* disp, uint8_t* sprite, int len, uint8_t x, uint8_t y
 	for (i = 0; i < len; ++i) {
 		for (j = 0; j < 8; ++j) {
 			pixel = (sprite[i] >> (7 - j)) & 0x01;
-			temp_y = CheckCoord(y + i, 0);
-			temp_x = CheckCoord(x + j, 1);
-			if (!(pixel ^ disp->pixel[temp_y][temp_x])) {
+			temp_y = (y + i) % 32;
+			temp_x = (x + j) % 64;
+			if (!(pixel ^ disp->pixel[temp_y][temp_x]))
 				if (pixel == 1)
 					VF = 1;
-				disp->pixel[temp_y][temp_x] = 0;
-			}
-			else {
-				disp->pixel[temp_y][temp_x] = 1;
-			}
+			disp->pixel[temp_y][temp_x] ^= pixel;
 		}
 	}
 	UpdateDisplay(disp);

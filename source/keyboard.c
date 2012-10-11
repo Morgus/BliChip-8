@@ -93,6 +93,7 @@ Keyboard* CreateKeyboard()
 {
 	Keyboard* keyb;
 	keyb = (Keyboard*) malloc(sizeof(Keyboard));
+	InitKeyboard(keyb);
 	return keyb;
 }
 

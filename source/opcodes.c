@@ -33,11 +33,11 @@ void Op_2NNN(uint16_t opcode, CPU* cpu)
 		printf("Stack overflow!\n");
 		return;
 	}
-	cpu->stack[cpu->reg.SP] = cpu->reg.PC - 2;
+	cpu->stack[cpu->reg.SP] = cpu->reg.PC;
 	// This is why SP points to the next stack location instead of the last
 	// address's location
 	++(cpu->reg.SP);
-	cpu->reg.PC = opcode & 0x0FFF;
+	cpu->reg.PC = (opcode & 0x0FFF) - 2;
 }
 
 void Op_3XNN(uint16_t opcode, CPU* cpu)
