@@ -9,38 +9,10 @@
 #include "keyboard.h"
 #include "display.h"
 
-void PrintDebug(CPU* cpu, Display* disp, Keyboard* keyb, Memory* mem)
-{
-	int i, j;
-	printf("CPU REGISTERS:\n\n");
-	for (i = 0; i <= 15; ++i)
-		printf("V%X: %X\n", i, cpu->reg.V[i]);
-	printf("I: %X\n", cpu->reg.I);
-	printf("DT: %X\n", cpu->reg.DT);
-	printf("ST: %X\n", cpu->reg.ST);
-	printf("PC: %X\n", cpu->reg.PC);
-	printf("SP: %X\n", cpu->reg.SP);
-	printf("\nSTACK:\n\n");
-	for (i = 0; i <= 15; ++i)
-		printf("%X: %X\n", i, cpu->stack[i]);
-	printf("\nDISPLAY:\n\n");
-	for (i = 0; i < 32; ++i) {
-		for (j = 0; j < 64; ++j)
-			printf("%i", disp->pixel[i][j]);
-		printf("\n");
-	}
-	printf("\nKEYBOARD:\n\n");
-	for (i = 0; i <= 15; ++i)
-		printf("%X: %i\n", i, keyb->key[i]);
-	printf("\nMEMORY:\n\n");
-	for (i = 0; i <= 0xFFF; ++i)
-		printf("%X: %X\n", i, mem->data[i]);
-}
-
 int main(int argc, char* argv[])
 {
 	if (argc != 2) {
-		printf("Wrong arguments.\n");
+		printf("Usage: BliChip-8 path/to/rom");
 		return 1;
 	}
 	
@@ -58,10 +30,6 @@ int main(int argc, char* argv[])
 	mem = CreateMemory(argv[1]);
 	keyb = CreateKeyboard();
 	disp = CreateDisplay();
-	
-	// Test, prints the contents of the memory and registers
-	PrintDebug(cpu, disp, keyb, mem);
-	/////////////
 	
 	UpdateDisplay(disp);
 	

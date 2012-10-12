@@ -5,7 +5,6 @@
 #ifndef _CPU_H_
 #define _CPU_H_
 
-#include <windows.h>
 #include <SDL.h>
 #include <stdio.h>
 #include <stdlib.h>

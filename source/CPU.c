@@ -10,7 +10,6 @@ void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp)
 {
 	uint16_t opcode;
 	opcode = (mem->data[cpu->reg.PC] << 8) | mem->data[cpu->reg.PC + 1];
-	printf("Opcode: %X in %X\n", opcode, cpu->reg.PC); // Debug
 	switch ((opcode & 0xF000) >> 12) {
 		case 0x0:
 			switch (opcode & 0x0FFF) {
@@ -143,7 +142,7 @@ void UpdateCPUTimers(CPU* cpu)
 		--(cpu->reg.DT);
 	if (cpu->reg.ST > 0) {
 		--(cpu->reg.ST);
-		Beep(500, 16);
+		// Beep sound should be played
 	}
 }
 
