@@ -22,7 +22,7 @@ $(objdir)/opcodes.o
 
 # Main build
 all: $(OBJS)
-	$(CC) $(OBJS) -o $(bindir)/program$(EXE) $(LIBS)
+	$(CC) $(OBJS) -o $(bindir)/BliChip8$(EXE) $(LIBS)
 
 # Objects
 $(objdir)/main.o: $(srcdir)/main.c
@@ -44,5 +44,5 @@ $(objdir)/opcodes.o: $(srcdir)/opcodes.c
 	$(CC) -c $? -o $@ $(CFLAGS)
 
 clean:
-	rm -f $(bindir)/program.exe
+	rm -f $(bindir)/*.exe
 	rm -f $(objdir)/*

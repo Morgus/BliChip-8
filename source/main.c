@@ -12,7 +12,7 @@
 int main(int argc, char* argv[])
 {
 	if (argc != 2) {
-		printf("Usage: BliChip-8 path/to/rom");
+		printf("Usage: BliChip8 path/to/rom");
 		return 1;
 	}
 	
