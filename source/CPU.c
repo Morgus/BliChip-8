@@ -1,12 +1,12 @@
 /* CPU
- * Aleksi Blinnikka 7.10.2012-
+ * Aleksi Blinnikka 7.10.2012-17.10.2012
  */
 
 #include "CPU.h"
 
 const int CYCLE_TIME = 4;
 
-void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp)
+void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp, Uint32 delta)
 {
 	uint16_t opcode;
 	opcode = (mem->data[cpu->reg.PC] << 8) | mem->data[cpu->reg.PC + 1];
@@ -132,17 +132,21 @@ void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp)
 			}
 			break;
 	}
-	UpdateCPUTimers(cpu);
+	UpdateCPUTimers(cpu, delta);
 	SDL_Delay(CYCLE_TIME);
 }
 
-void UpdateCPUTimers(CPU* cpu)
+void UpdateCPUTimers(CPU* cpu, Uint32 delta)
 {
-	if (cpu->reg.DT > 0)
-		--(cpu->reg.DT);
-	if (cpu->reg.ST > 0) {
-		--(cpu->reg.ST);
-		// Beep sound should be played
+	cpu->delta += delta;
+	if (cpu->delta >= 16) {
+		if (cpu->reg.DT > 0)
+			--(cpu->reg.DT);
+		if (cpu->reg.ST > 0) {
+			--(cpu->reg.ST);
+			// Beep sound should be played
+		}
+		cpu->delta = 0;
 	}
 }
 

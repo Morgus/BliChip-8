@@ -1,5 +1,5 @@
 /* Chip-8 Emulator
- * Aleksi Blinnikka 8.10.2012-
+ * Aleksi Blinnikka 8.10.2012-17.10.2012
  */
 
 #include <stdio.h>
@@ -25,12 +25,15 @@ int main(int argc, char* argv[])
 	Memory* mem;
 	Keyboard* keyb;
 	Display* disp;
+	Uint32 currentTime, prevTime, delta;
 	
 	cpu = CreateCPU();
 	mem = CreateMemory(argv[1]);
 	keyb = CreateKeyboard();
 	disp = CreateDisplay();
 	
+	prevTime = SDL_GetTicks();
+	currentTime = SDL_GetTicks();
 	UpdateDisplay(disp);
 	
 	while (cpu->running) {
@@ -38,8 +41,13 @@ int main(int argc, char* argv[])
 			if (ev.type == SDL_QUIT)
 				cpu->running = 0;
 		}
+		
+		currentTime = SDL_GetTicks();
+		delta = currentTime - prevTime;
+		prevTime = currentTime;
+		
 		UpdateKeyboard(keyb);
-		DoCPUCycle(cpu, mem, keyb, disp);
+		DoCPUCycle(cpu, mem, keyb, disp, delta);
 		cpu->reg.PC += 2;
 	}
 	

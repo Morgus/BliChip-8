@@ -1,5 +1,5 @@
 /* Chip-8 CPU
- * Aleksi Blinnikka 7.10.2012-
+ * Aleksi Blinnikka 7.10.2012-17.10.2012
  */
 
 #ifndef _CPU_H_
@@ -40,7 +40,9 @@ typedef struct _CPU
 {
 	Registers reg;
 	uint16_t stack[16];
+	
 	int running;
+	int delta;
 } CPU;
 
 void Op_0NNN();
@@ -79,8 +81,8 @@ void Op_FX33(uint16_t opcode, CPU* cpu, Memory* mem);
 void Op_FX55(uint16_t opcode, CPU* cpu, Memory* mem);
 void Op_FX65(uint16_t opcode, CPU* cpu, Memory* mem);
 
-void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp);
-void UpdateCPUTimers(CPU* cpu);
+void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp, Uint32 delta);
+void UpdateCPUTimers(CPU* cpu, Uint32 delta);
 
 CPU* CreateCPU();
 void InitCPU(CPU* cpu);
