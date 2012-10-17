@@ -4,7 +4,7 @@
 
 #include "CPU.h"
 
-const int CYCLE_TIME = 4;
+const int CYCLE_TIME = 6; // 166 Hz
 
 void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp, Uint32 delta)
 {
@@ -133,7 +133,9 @@ void DoCPUCycle(CPU* cpu, Memory* mem, Keyboard* keyb, Display* disp, Uint32 del
 			break;
 	}
 	UpdateCPUTimers(cpu, delta);
-	SDL_Delay(CYCLE_TIME);
+	
+	if (delta < CYCLE_TIME)
+		SDL_Delay(CYCLE_TIME - delta);
 }
 
 void UpdateCPUTimers(CPU* cpu, Uint32 delta)
