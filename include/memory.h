@@ -1,5 +1,5 @@
 /* Chip-8 Memory
- * Aleksi Blinnikka 7.10.2012-
+ * Aleksi Blinnikka 7.10.2012-12.10.2012
  */
 
 #ifndef _MEMORY_H_

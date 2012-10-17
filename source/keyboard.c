@@ -1,5 +1,5 @@
 /* Keyboard
- * Aleksi Blinnikka 8.10.2012-
+ * Aleksi Blinnikka 8.10.2012-12.10.2012
  */
 
 #include "keyboard.h"

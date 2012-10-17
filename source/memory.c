@@ -1,5 +1,5 @@
 /* Memory
- * Aleksi Blinnikka 7.10.2012-
+ * Aleksi Blinnikka 7.10.2012-12.10.2012
  */
 
 #include "memory.h"

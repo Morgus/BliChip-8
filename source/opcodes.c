@@ -1,5 +1,5 @@
 /* Chip-8 CPU opcodes
- * Aleksi Blinnikka 9.10.2012-
+ * Aleksi Blinnikka 9.10.2012-12.10.2012
  */
 
 #include "CPU.h"
