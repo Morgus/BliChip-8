@@ -1,5 +1,5 @@
 /* Display
- * Aleksi Blinnikka 8.10.2012-
+ * Aleksi Blinnikka 8.10.2012-17.10.2012
  */
 
 #include "display.h"
@@ -43,13 +43,15 @@ uint8_t DrawSprite(Display* disp, uint8_t* sprite, int len, uint8_t x, uint8_t y
 void UpdateDisplay(Display* disp)
 {
 	int i, j;
+	
+	SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(disp->renderer);
+	SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
+	
 	for (i = 0; i < 32; ++i) {
 		for (j = 0; j < 64; ++j) {
 			if (disp->pixel[i][j])
-				SDL_SetRenderDrawColor(disp->renderer, 255, 255, 255, 255);
-			else
-				SDL_SetRenderDrawColor(disp->renderer, 0, 0, 0, 255);
-			SDL_RenderFillRect(disp->renderer, &(disp->pixelRect[i][j]));
+				SDL_RenderFillRect(disp->renderer, &(disp->pixelRect[i][j]));
 		}
 	}
 	SDL_RenderPresent(disp->renderer);
