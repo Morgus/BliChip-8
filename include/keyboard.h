@@ -23,9 +23,12 @@ typedef struct _Keypad
 	Uint8* state;
 } Keyboard;
 
+/* Called every CPU cycle */
 void UpdateKeyboard(Keyboard* keyb);
 
+/* Init/Shutdown */
 Keyboard* CreateKeyboard();
+// In case there will be functionality to change program within the emulator
 void InitKeyboard(Keyboard* keyb);
 void DestroyKeyboard(Keyboard* keyb);
 

@@ -6,5 +6,4 @@ The source code is distributed under the MIT license (see LICENSE.md).
 
 ## Issues
 
-- Slow
 - No sound

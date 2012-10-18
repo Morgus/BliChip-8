@@ -85,5 +85,7 @@ Display* CreateDisplay()
 
 void DestroyDisplay(Display* disp)
 {
+	SDL_DestroyRenderer(disp->renderer);
+	SDL_DestroyWindow(disp->window);
 	free(disp);
 }
